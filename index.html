@@ -15,79 +15,11 @@
     <link rel="icon" type="image/png" href="https://victorxxx19.github.io/cashin-icons/apple-touch-icon-180x180.png">
     
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            background-color: #0F172A; /* Cor de fundo enquanto carrega */
-            overflow: hidden; /* Evita rolagem dupla */
-            font-family: -apple-system, sans-serif;
-        }
-
-        /* Estilo do Iframe para ocupar tudo */
-        #app-frame {
-            border: none;
-            width: 100%;
-            height: 100%;
-            display: none; /* Escondido até confirmarmos que é app */
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        /* Guia de Instalação (para quando abre no navegador) */
-        .install-guide {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .icon-preview {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
-            background-image: url('https://victorxxx19.github.io/cashin-icons/apple-touch-icon-180x180.png');
-            background-size: cover;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #0F172A; overflow: hidden; }
+        iframe { border: none; width: 100%; height: 100%; display: block; }
     </style>
-
-    <script>
-        // SEU LINK DO GOOGLE APPS SCRIPT
-        const googleAppUrl = "https://script.google.com/macros/s/AKfycbxFQ7DyV2Dnyf47TbaAvQG_uVZdMer2V65fbs7-BGCQ838nC4laoR_mC0Q37ocWp4zI_Q/exec";
-
-        function init() {
-            // Detecta se está em modo App (iOS ou Android)
-            const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
-
-            if (isStandalone) {
-                // MODO APP: Carrega o Google dentro do Iframe
-                const frame = document.getElementById('app-frame');
-                frame.src = googleAppUrl;
-                frame.style.display = 'block';
-            } else {
-                // MODO NAVEGADOR: Mostra instruções
-                document.getElementById('install-guide').style.display = 'flex';
-            }
-        }
-    </script>
 </head>
-<body onload="init()">
-
-    <iframe id="app-frame" title="CashIn App"></iframe>
-
-    <div id="install-guide" class="install-guide">
-        <div class="icon-preview"></div>
-        <h2 style="margin-top:0">Instalar CashIn</h2>
-        <p>Toque em <strong>Compartilhar</strong> <i class="fa-solid fa-share-from-square"></i></p>
-        <p>E escolha <strong>"Adicionar à Tela de Início"</strong></p>
-    </div>
-
+<body>
+    <iframe src="https://script.google.com/macros/s/AKfycbxAsP47LFnQLZJbYxYDsP0i7euvhTULXuwHJf010urdAzkiyWUt2PHrTVKuNY_S6urf4w/exec"></iframe>
 </body>
 </html>
