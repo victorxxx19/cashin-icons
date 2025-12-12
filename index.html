@@ -6,6 +6,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0F172A">
+    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CashIn">
@@ -14,35 +15,37 @@
     <link rel="icon" type="image/png" href="https://victorxxx19.github.io/cashin-icons/apple-touch-icon-180x180.png">
     
     <style>
-        body {
-            background-color: #0F172A;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        body, html {
             margin: 0;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #0F172A; /* Cor de fundo enquanto carrega */
+            overflow: hidden; /* Evita rolagem dupla */
+            font-family: -apple-system, sans-serif;
+        }
+
+        /* Estilo do Iframe para ocupar tudo */
+        #app-frame {
+            border: none;
+            width: 100%;
+            height: 100%;
+            display: none; /* Escondido até confirmarmos que é app */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Guia de Instalação (para quando abre no navegador) */
+        .install-guide {
+            display: none;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
             text-align: center;
             padding: 20px;
-        }
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-bottom: 20px;
-            display: none; /* Escondido por padrão */
-        }
-        .install-guide {
-            display: none; /* Escondido por padrão */
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            max-width: 300px;
         }
         .icon-preview {
             width: 80px;
@@ -50,38 +53,26 @@
             border-radius: 18px;
             background-image: url('https://victorxxx19.github.io/cashin-icons/apple-touch-icon-180x180.png');
             background-size: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .btn-manual {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            color: #ccc;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 
     <script>
         // SEU LINK DO GOOGLE APPS SCRIPT
-        const appUrl = "https://script.google.com/macros/s/AKfycbxFQ7DyV2Dnyf47TbaAvQG_uVZdMer2V65fbs7-BGCQ838nC4laoR_mC0Q37ocWp4zI_Q/exec";
+        const googleAppUrl = "https://script.google.com/macros/s/AKfycbxFQ7DyV2Dnyf47TbaAvQG_uVZdMer2V65fbs7-BGCQ838nC4laoR_mC0Q37ocWp4zI_Q/exec";
 
         function init() {
-            // Verifica se está rodando como App (Tela Cheia)
-            // iOS usa 'standalone', Android usa 'display-mode: standalone'
+            // Detecta se está em modo App (iOS ou Android)
             const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 
             if (isStandalone) {
-                // MODO APP: Mostra o loader e redireciona
-                document.getElementById('loader').style.display = 'block';
-                document.getElementById('status-text').innerText = 'Abrindo CashIn...';
-                window.location.replace(appUrl);
+                // MODO APP: Carrega o Google dentro do Iframe
+                const frame = document.getElementById('app-frame');
+                frame.src = googleAppUrl;
+                frame.style.display = 'block';
             } else {
-                // MODO NAVEGADOR: NÃO REDIRECIONA! Mostra instruções de instalação.
+                // MODO NAVEGADOR: Mostra instruções
                 document.getElementById('install-guide').style.display = 'flex';
             }
         }
@@ -89,19 +80,13 @@
 </head>
 <body onload="init()">
 
-    <div id="loader" class="loader"></div>
-    <div id="status-text"></div>
+    <iframe id="app-frame" title="CashIn App"></iframe>
 
     <div id="install-guide" class="install-guide">
         <div class="icon-preview"></div>
-        <h2 style="margin:0; font-size: 20px;">Instalar CashIn</h2>
-        <p style="color: #aaa; font-size: 15px; line-height: 1.4;">
-            Para instalar, toque no botão <strong>Compartilhar</strong> <i class="fa-solid fa-share-from-square"></i> abaixo e escolha <strong>"Adicionar à Tela de Início"</strong>.
-        </p>
-        
-        <a href="#" onclick="window.location.replace(appUrl); return false;" class="btn-manual">
-            Abrir no navegador sem instalar
-        </a>
+        <h2 style="margin-top:0">Instalar CashIn</h2>
+        <p>Toque em <strong>Compartilhar</strong> <i class="fa-solid fa-share-from-square"></i></p>
+        <p>E escolha <strong>"Adicionar à Tela de Início"</strong></p>
     </div>
 
 </body>
