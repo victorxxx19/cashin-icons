@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>CashIn</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0F172A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CashIn">
+
+    <link rel="apple-touch-icon" href="https://victorxxx19.github.io/cashin-icons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://victorxxx19.github.io/cashin-icons/apple-touch-icon-180x180.png">
+    
+    <style>
+        body {
+            background-color: #0F172A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            flex-direction: column;
+        }
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+
+    <script>
+        // COLOCAR SEU LINK DO GOOGLE APPS SCRIPT AQUI (Link do /exec)
+        const appUrl = "https://script.google.com/macros/s/SEU_ID_DO_SCRIPT/exec";
+
+        // Redireciona imediatamente
+        window.location.replace(appUrl);
+    </script>
+</head>
+<body>
+    <div class="loader"></div>
+    <div style="font-weight: 600;">Abrindo CashIn...</div>
+</body>
+</html>
